@@ -1,0 +1,126 @@
+<style>
+  /* General styling for the navbar */
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    /* Optional navbar background */
+  }
+
+  /* Styling for the search form */
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Adds space between input and button */
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* Search input field */
+  .search-input {
+    flex: 1;
+    /* Ensures the input takes available space */
+    border: 2px solid #f01717;
+    /* Adds a border */
+    border-radius: 25px;
+    /* Makes the input rounded */
+    padding: 10px 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  /* Hover effect for the input */
+  .search-input:hover,
+  .search-input:focus {
+    border-color: #f01717;
+    /* Darkens the border on hover/focus */
+  }
+
+  /* Search button */
+  .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f01717;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    /* Makes the button rounded */
+    padding: 5px 20px;
+    cursor: pointer;
+    /* transition: background-color 0.3s ease; */
+  }
+
+  /* Search icon inside the button */
+  .search-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    font-size: 14px;
+  }
+
+  /* Hover effect for the button */
+  .search-btn:hover {
+    background-color: #f01717;
+    /* Changes button color on hover */
+    color: white;
+  }
+
+  .search-btn:active {
+    background-color: #f01717;
+    color: white;
+  }
+</style>
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+        <a class="nav-link" href="/listings">Explore</a>
+
+      </div>
+
+
+      <div class="navbar-nav mx-auto">
+        <form class="d-flex search-form" role="search" method="GET" action="/listings">
+          <input class="form-control search-input" name="search" type="search" placeholder="Search"
+            value="<%= typeof search !== 'undefined' ? search : '' %>">
+          <button class="search-btn" type="submit">
+            <span class="search-icon">
+              <i class="fas fa-search"></i>
+            </span>
+            Search
+          </button>
+        </form>
+      </div>
+
+
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Create New Route</a>
+
+        <% if (!currUser) { %>
+
+          <a class="nav-link active" aria-current="page" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>LogIn</b></a>
+          <% } %>
+
+            <% if (currUser) { %>
+              <a class="nav-link" href="/logout"><b>Logout</b></a>
+              <% } %>
+
+      </div>
+    </div>
+  </div>
+</nav>

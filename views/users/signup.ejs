@@ -1,0 +1,37 @@
+<% layout('./layouts/boilerplate.ejs') %>
+  <div class="card shadow-lg w-100 col-md-6 offset-3" style="max-width: 500px;">
+    <div class="card-body">
+      <h2 class="text-center text-primary mb-2">SignUp to Wanderlust</h2>
+      <form action="/signup" method="POST" class="needs-validation" novalidate>
+        <!-- Title -->
+        <div class="mb-2">
+          <label for="username" class="form-label">Title</label>
+          <input type="text" id="username" name="username" placeholder="Enter the title" required class="form-control">
+          <div class="invalid-feedback">Please enter a title.</div>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="mb-2">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter the Email" required class="form-control">
+          <div class="invalid-feedback">Please enter a email.</div>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="mb-2">
+          <label for="password" class="form-label">Password</label>
+          <input type="text" id="password" name="password" placeholder="Enter the Email" required class="form-control">
+          <div class="invalid-feedback">Please enter a password.</div>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+
+
+
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary w-100">signup</button>
+        </div>
+      </form>
+    </div>
+  </div>

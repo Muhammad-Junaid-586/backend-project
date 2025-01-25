@@ -1,0 +1,212 @@
+<% layout('./layouts/boilerplate') %>
+
+  <style>
+    .filters-container {
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    /* .filters-container.d-none {
+    max-height: 0;
+    overflow: hidden;
+  } */
+
+    .filters-container.d-flex {
+      max-height: 1000px;
+      /* Large enough to display all items */
+      overflow: visible;
+    }
+
+    .filter-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      opacity: .7;
+    }
+
+    .filter-item:hover {
+      opacity: 1;
+    }
+
+    .filter-icon {
+      font-size: 24px;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .filter-item span {
+      /* font-size: 14px; */
+      color: #333;
+    }
+
+    /* Tax Switch Styling */
+    .tax-switch-container {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgb(143, 139, 139);
+      padding: 0px 1rem;
+      border-radius: 1rem;
+      color: black;
+      opacity: .7;
+      /* justify-content: center; */
+      height: 3rem;
+    }
+
+    .tax-switch-container:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    .tax-switch-container .form-check-label {
+      /* font-size: 14px; */
+      white-space: nowrap;
+    }
+
+    .tax-switch-container .form-check-input {
+      transform: scale(1);
+      margin-left: 0.5rem;
+    }
+
+    .outer-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .outer-container.flex-column {
+      flex-direction: column;
+      /* align-items: flex-start; */
+      /* Align items to the start */
+    }
+
+    .taxEle {
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="mt-4 mb-3 d-flex align-items-md-start align-items-lg-center outer-container">
+
+        <!-- Filters Section -->
+        <div class="d-flex flex-wrap filters-container d-none d-lg-flex mt-3 col-md-10 col-lg-9">
+          <div class="filter-item">
+            <i class="fas fa-fire-alt filter-icon"></i>
+            <a href="/listings?category=trending"><span>Trending</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-door-open filter-icon"></i>
+            <a href="/listings?category=rooms"><span>Rooms</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-city filter-icon"></i>
+            <a href="/listings?category=iconic-cities"><span>Iconic Cities</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-mountain filter-icon"></i>
+            <a href="/listings?category=mountains"><span>Mountains</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-chess-rook filter-icon"></i>
+            <a href="/listings?category=castles"><span>Castles</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-swimming-pool filter-icon"></i>
+            <a href="/listings?category=amazing-pools"><span>Amazing Pools</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-tractor filter-icon"></i>
+            <a href="/listings?category=farms"><span>Farms</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-igloo filter-icon"></i>
+            <a href="/listings?category=arctic"><span>Arctic</span></a>
+          </div>
+          <div class="filter-item">
+            <i class="fas fa-campground filter-icon"></i>
+            <a href="/listings?category=camping"><span>Camping</span></a>
+          </div>
+        </div>
+
+        <!-- Top Bar: Hamburger Menu and Tax Switch -->
+        <div class="d-flex justify-content-between align-items-center gap-2">
+          <!-- Hamburger/Cross Icon for Small Screens -->
+          <button class="btn btn-primary d-lg-none" id="toggleFilters">
+            <i class="fas fa-bars" id="menuIcon"></i>
+          </button>
+
+          <!-- Tax Switch -->
+          <div class="d-flex align-items-center ms-auto tax-switch-container form-switch form-check-reverse">
+            <label class="form-check-label me-2" for="flexSwitchCheckReverse">Show total after taxes</label>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse" role="switch">
+          </div>
+        </div>
+      </div>
+
+      <!-- Listings -->
+      <div class="row">
+        <% for (const list of allListing) { %>
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <a href="/listings/<%= list._id %>" class="card-listing-a">
+              <div class="card hover-effect" style="width: 100%;">
+                <img src="<%= list.image.url %>" class="card-img-top" alt="<%= list.title %>">
+
+                <div class="card-body">
+                  <p class="card-title">
+                    <b>
+                      <%= list.title %>
+                    </b>
+                  </p>
+                  <p class="card-title">
+                    <%= list.price.toLocaleString('en-PK') %> /night
+                      <i class="taxEle"> + 18% BGT</i>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% } %>
+      </div>
+
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("toggleFilters");
+        const outerContainer = document.querySelector(".outer-container");
+        const menuIcon = document.getElementById("menuIcon");
+        const filterContainer = document.querySelector('.filters-container');
+        const switchToggle = document.querySelector('.tax-switch-container');
+
+        toggleButton.addEventListener("click", () => {
+          if (!outerContainer.classList.contains("flex-column")) {
+            filterContainer.classList.remove('d-none');
+            outerContainer.classList.add("flex-column");
+            menuIcon.classList.remove("fa-bars");
+            menuIcon.classList.add("fa-times");
+          } else {
+            outerContainer.classList.remove("flex-column");
+            filterContainer.classList.add("d-none");
+            menuIcon.classList.remove("fa-times");
+            menuIcon.classList.add("fa-bars");
+          }
+        });
+
+        switchToggle.addEventListener('click', function () {
+          let taxInfo = document.getElementsByClassName('taxEle');
+          for (const info of taxInfo) {
+            if (info.style.display != 'inline') {
+              info.style.display = 'inline';
+            } else {
+              info.style.display = 'none';
+            }
+          }
+        });
+      });
+    </script>
+  </body>

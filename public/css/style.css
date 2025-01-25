@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italianno&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italianno&family=Vesper+Libre:wght@400;500;700;900&display=swap");
+body {
+  background-color: aliceblue;
+  font-family: "Plus Jakarta Sans", serif;
+  font-family: "Italianno", serif;
+  /* font-family: "Vesper Libre", serif; */
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: blue;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
+}
+
+.navbar {
+  height: 5rem !important;
+  background-color: white !important;
+}
+.fa-compass {
+  color: #f01717 !important;
+  font-size: 2rem;
+}
+.nav-link {
+  color: #222222 !important;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: 1rem;
+  border-radius: 1rem !important;
+}
+
+.card-img-top {
+  height: 15rem !important;
+  border-radius: 1rem !important;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1rem 0.4rem !important;
+}
+
+.hover-effect {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card-listing-a {
+  text-decoration: none;
+}
